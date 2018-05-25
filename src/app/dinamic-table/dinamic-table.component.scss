@@ -1,0 +1,38 @@
+input {
+    width: 200px;
+    height: 20px;
+    box-shadow: 5px;
+}
+
+button {
+    width: 100px;
+    height: 20px;
+    box-shadow: 10px;
+    display: inline-block
+}
+
+select {
+    width: 200px;
+    height: 25px;
+    display: inline-block
+}
+
+.sub {
+    position: relative;
+    margin-top: 10px;
+    left: 310px;
+}
+
+.container {
+    margin-bottom: 10px;
+}
+.contenedorElemento {
+    padding-left: 5px;
+    display: inline-block;
+}
+
+.error {
+    color: red;
+    font-family: cursive;
+    font-weight: 100;
+}

@@ -1,0 +1,55 @@
+<form [formGroup]="formIdentificaciones">
+  <div formArrayName="identificaciones">
+    <div *ngFor="let identif of identificaciones.controls; let indice=index" class="container">      
+      <div [formGroupName]="indice">
+        <div class="contenedorElemento">
+          <select formControlName="tipo">
+            <option value="A" [selected]="'A'">Seleccione una opcion</option>
+            <option *ngFor="let tipo of tiposRowset" [value]="tipo.codigo">
+              {{ tipo.descripcion }}
+            </option>
+          </select>
+        </div>
+        <div class="contenedorElemento">
+          <input formControlName="id" type="text" placeholder="ID">
+        </div>
+        <div class="contenedorElemento">
+          <div [hidden]="getTipo(indice) != 'SSN'">
+              <select formControlName="clasificacion">
+                <option value="C" [selected]="'C'">Seleccione una clasificacion</option>
+                <option *ngFor="let clasif of clasificacionRowset" [value]="clasif.codigo">{{ clasif.descripcion }}</option>
+              </select>      
+          </div>
+        </div>
+        <div class="contenedorElemento">
+          <div [hidden]="getTipo(indice) != 'SSN' && filaEstaEnEdicion(indice)">
+            <app-my-button [name]="filaEstaEnEdicion(indice) ? 'Editar' : 'Guardar'"
+              (click)="enviarDatosFila(indice)"
+            ></app-my-button>
+          </div>
+        </div>
+        <div class="contenedorElemento">
+          <div *ngIf="filaEstaEnConfirmacion(indice); then back else trash"></div>
+          <ng-template #back>
+              <app-my-button name="Back"
+              (click)="retrocederCambios(indice)"
+            ></app-my-button>  
+          </ng-template>
+          <ng-template #trash>
+              <app-my-button name="Eliminar"
+              (click)="eliminarFila(indice)"
+            ></app-my-button>  
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="sub">
+    <button type="button" (click)="agregarItem()">Add</button>
+  </div>
+  
+</form>
+
+<div class="error" *ngIf="errorPorIntentarAgregarExistente">
+  ERROR
+</div>
