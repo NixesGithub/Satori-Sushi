@@ -14,7 +14,10 @@
             </select>      
           </div>
           <div class="contenedorElemento">
-            <input [value]="true" name="principal" type="radio" formControlName="principal" [checked]="indice == 0">
+            <input [value]="true" name="principal" 
+              type="radio" formControlName="principal" 
+              [checked]="getPrincipal(indice)" (change)="actualizarRadioPrincipal(indice)"
+            >
           </div>
           <div class="contenedorElemento">
             <app-my-button [name]="filaEstaEnEdicion(indice) ? 'Editar' : 'Guardar'"

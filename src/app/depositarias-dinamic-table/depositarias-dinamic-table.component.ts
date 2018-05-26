@@ -102,43 +102,31 @@ export class DepositariasDinamicTableComponent implements OnInit {
     return this.cajasDepositarias.at(indice).get('estadoAnterior')
   }
 
+  //MÉTODOS QUE SE USAN EN EL HTML (BOTONES Y DEMÁS)
+
+  /**
+   * Boton ADD, agrega una nueva fila en la tabla
+   */
   agregarItem() {    
     this.setFalseErrors()
     if(this.cajasDepositarias.length == 0) { this.cajasDepositarias.push(this.crearItem(new Depositaria(true))) }
     else { this.cajasDepositarias.push(this.crearItem(new Depositaria(false))) }
   }
 
-  copiarElementosActualesEnAnteriores(indice: number) {
-    this.cajasDepositarias.at(indice).get('idAnterior').setValue(this.getId(indice))
-    this.cajasDepositarias.at(indice).get('cajaRealDepositoAnterior').setValue(this.getCajaRealDeposito(indice))
-    this.cajasDepositarias.at(indice).get('principalAnterior').setValue(this.getPrincipal(indice))
-  }
-
-  copiarElementosAnterioresEnActuales(indice: number) {
-    this.cajasDepositarias.at(indice).get('id').setValue(this.getIdAnterior(indice))
-    this.cajasDepositarias.at(indice).get('cajaRealDeposito').setValue(this.getcajaRealDepositoAnterior(indice))
-    this.cajasDepositarias.at(indice).get('principal').setValue(this.getPrincipalAnterior(indice))
-  }
-
-  /**
-   * Controla si el tipo que se quiere ingresar ya existe
-   * @param indice indica la fila actual que se quiere agregar
-   */
-  cajaRealDepositoYaExiste(indice: number): boolean {
-    let encontrado: number = this.cajasDepositarias.controls.findIndex(e => e.get('cajaRealDepositoAnterior').value == this.getCajaRealDeposito(indice))
-    return encontrado != -1 && encontrado != indice
-  }
-
   /**
    * Recorre la lista y cambia los value de principal en false cuando la caja que estoy guardando/modificando
    * esta seleccionada como principal
    */
-  actualizarRadioPrincipal(indice: number) {
+    actualizarRadioPrincipal(indice: number) {
     if(this.getPrincipal(indice)) {
       this.cajasDepositarias.controls.forEach(e => { if(this.getId(indice) != e.get('id').value) { e.get('principal').setValue(false) } })
     }
   }
 
+  /**
+   * Boton aceptar, modificar, en caso de aceptar, envia la nueva fila, si es modificar habilita los campos
+   * @param indice 
+   */
   enviarDatosFila(indice: number) {
     switch(this.estadoActualFila(indice).value) {
       case Estados.NUEVA_IDENTIFICACION:
@@ -148,9 +136,10 @@ export class DepositariasDinamicTableComponent implements OnInit {
           //Modifica el estado actual
           this.estadoActualFila(indice).setValue(Estados.IDENTIFICACION_EN_EDICION)
           this.estadoAnteriorFila(indice).setValue(Estados.IDENTIFICACION_EN_EDICION)
-          this.actualizarRadioPrincipal(indice)
           //Copia Valores actuales en valores anteriores
           this.copiarElementosActualesEnAnteriores(indice)
+          this.actualizarRadioPrincipal(indice)
+          this.actualizarCambioDeCajaPrincipal()
           //Deshabilita la fila
           this.cajasDepositarias.at(indice).disable()
           console.log("NUEVA IDENTIFICACION: ", this.getFilaActual(indice))
@@ -176,6 +165,7 @@ export class DepositariasDinamicTableComponent implements OnInit {
           this.estadoActualFila(indice).setValue(Estados.IDENTIFICACION_EN_EDICION)
           this.copiarElementosActualesEnAnteriores(indice)   
           this.actualizarRadioPrincipal(indice)
+          this.actualizarCambioDeCajaPrincipal()
           //Deshabilita la fila
           this.cajasDepositarias.at(indice).disable()
           console.log("CONFIRMAR EDICION: ", this.getFilaActual(indice))
@@ -185,14 +175,11 @@ export class DepositariasDinamicTableComponent implements OnInit {
     }
   }
 
-  cajaNoEsPrincipal(indice: number): boolean {
-    return this.getPrincipal(indice) == false
-  }
 
-  cajaDepositariaEsUnica(indice: number): boolean {
-    return this.cajasDepositarias.length == 1 && indice == 0
-  }
-
+  /**
+   * Boton Eliminar, elimina la fila actual
+   * @param indice 
+   */
   eliminarFila(indice: number) {
     if(this.cajaNoEsPrincipal(indice) || this.cajaDepositariaEsUnica(indice)) {
       this.cajasDepositarias.removeAt(indice)
@@ -203,19 +190,72 @@ export class DepositariasDinamicTableComponent implements OnInit {
     console.log("ELIMINAR")
   }
 
+  /**
+   * Boton back para retroceder los cambios hechos en la tabla
+   * @param indice 
+   */
   retrocederCambios(indice: number) {
     this.estadoActualFila(indice).setValue(this.estadoAnteriorFila(indice).value)
     this.copiarElementosAnterioresEnActuales(indice)
+    this.retrocederCambioDeCajaPrincipal()
     this.cajasDepositarias.at(indice).disable()
     this.setFalseErrors()
     console.log("BACK", this.getFilaActual(indice))
   }
 
-  setFalseErrors() {
+  /**
+   * Recibe la respuesta de consulta de la BE13 y carga las cajas existentes para una especie
+   * modelo seleccionada
+   */
+  cargarTablaConDatosDeConsulta() {
+    
+  }
+
+
+
+  //MÉTODOS PRIVADOS QUE SOLO SE USAN EN EL TS
+
+  private copiarElementosActualesEnAnteriores(indice: number) {
+    this.cajasDepositarias.at(indice).get('idAnterior').setValue(this.getId(indice))
+    this.cajasDepositarias.at(indice).get('cajaRealDepositoAnterior').setValue(this.getCajaRealDeposito(indice))
+    this.cajasDepositarias.at(indice).get('principalAnterior').setValue(this.getPrincipal(indice))
+  }
+
+  private copiarElementosAnterioresEnActuales(indice: number) {
+    this.cajasDepositarias.at(indice).get('id').setValue(this.getIdAnterior(indice))
+    this.cajasDepositarias.at(indice).get('cajaRealDeposito').setValue(this.getcajaRealDepositoAnterior(indice))
+    this.cajasDepositarias.at(indice).get('principal').setValue(this.getPrincipalAnterior(indice))
+  }
+
+  /**
+   * Controla si el tipo que se quiere ingresar ya existe
+   * @param indice indica la fila actual que se quiere agregar
+   */
+  private cajaRealDepositoYaExiste(indice: number): boolean {
+    let encontrado: number = this.cajasDepositarias.controls.findIndex(e => e.get('cajaRealDepositoAnterior').value == this.getCajaRealDeposito(indice))
+    return encontrado != -1 && encontrado != indice
+  }
+
+  private cajaNoEsPrincipal(indice: number): boolean {
+    return this.getPrincipal(indice) == false
+  }
+
+  private cajaDepositariaEsUnica(indice: number): boolean {
+    return this.cajasDepositarias.length == 1 && indice == 0
+  }
+
+  private setFalseErrors() {
     this.errorPorIntentarAgregarExistente = false
     this.errorPorIntentarEliminarCajaPrincipal = false
   }
 
+  private retrocederCambioDeCajaPrincipal() {
+    this.cajasDepositarias.controls.forEach(e => e.get('principal').setValue(e.get('principalAnterior').value))
+  }
+
+  private actualizarCambioDeCajaPrincipal() {
+    this.cajasDepositarias.controls.forEach(e => e.get('principalAnterior').setValue(e.get('principal').value))
+  }
 
   //para mi 
   debugLista() {
