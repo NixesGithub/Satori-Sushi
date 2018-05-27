@@ -12,19 +12,24 @@
         </div>
         <div class="contenedorElemento">
           <input formControlName="id" type="text" placeholder="ID">
+          <div class="error" *ngIf="getErrorSinID(indice)">
+            ERROR ID REQUERIDO
+          </div>
         </div>
         <div class="contenedorElemento">
           <div [hidden]="getTipo(indice) != 'SSN'">
               <select formControlName="clasificacion">
-                <option value="C" [selected]="'C'">Seleccione una clasificacion</option>
+                <option value="A" [selected]="'A'">Seleccione una clasificacion</option>
                 <option *ngFor="let clasif of clasificacionRowset" [value]="clasif.codigo">{{ clasif.descripcion }}</option>
               </select>      
           </div>
         </div>
         <div class="contenedorElemento">
           <div [hidden]="getTipo(indice) != 'SSN' && filaEstaEnEdicion(indice)">
-            <app-my-button [name]="filaEstaEnEdicion(indice) ? 'Editar' : 'Guardar'"
+            <app-my-button 
+              [name]="filaEstaEnEdicion(indice) ? 'Editar' : 'Guardar'"
               (click)="enviarDatosFila(indice)"
+              [disabled]="disabledButton(indice)"
             ></app-my-button>
           </div>
         </div>

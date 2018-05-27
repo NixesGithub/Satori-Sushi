@@ -10,6 +10,7 @@ export class MyButtonComponent implements OnInit {
 
    @Input() disabled: boolean = false
    @Input() name: string
+   @Input() type: string = "button"
  
   constructor() { }
 

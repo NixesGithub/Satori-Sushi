@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { Identificacion, Tipos, Estados } from './model';
 
 @Component({
@@ -26,7 +26,7 @@ export class DinamicTableComponent implements OnInit {
   crearItem(nuevo: Identificacion): FormGroup {
     return this.fb.group({
       tipo: nuevo.tipo,
-      id: nuevo.id,
+      id: [nuevo.id, Validators.required],
       clasificacion: nuevo.clasificacion,
       estado: Estados.NUEVA_IDENTIFICACION,
 
@@ -40,6 +40,37 @@ export class DinamicTableComponent implements OnInit {
   get identificaciones() {
     return this.formIdentificaciones.get('identificaciones') as FormArray
   }
+
+  getErrorSinID(indice: number): boolean {
+    return (this.identificaciones.at(indice).get('id').invalid && this.identificaciones.at(indice).get('id').touched) &&
+            (this.identificaciones.at(indice).get('id').dirty || this.identificaciones.at(indice).get('id').pristine)
+  }
+
+  getErrorConSSNSinClasificacion(indice: number): boolean {    
+    return (this.identificaciones.at(indice).get('clasificacion').valid && this.identificaciones.at(indice).get('clasificacion').touched) &&
+            (this.identificaciones.at(indice).get('clasificacion').dirty || this.identificaciones.at(indice).get('clasificacion').pristine) || 
+            this.getClasificacion(indice) == 'A'
+  }
+  
+  getDisabledPorIDNuncaCargado(indice: number): boolean {
+    return this.identificaciones.at(indice).get('id').invalid && 
+           this.identificaciones.at(indice).get('id').untouched && 
+           this.identificaciones.at(indice).get('id').pristine
+  }
+
+  getDisablePorClasificacionNuncaCargada(indice: number): boolean {
+    return this.identificaciones.at(indice).get('clasificacion').valid && 
+           this.identificaciones.at(indice).get('clasificacion').untouched && 
+           this.identificaciones.at(indice).get('clasificacion').pristine
+  }
+
+  disabledButton(indice: number): boolean {
+    return this.getTipo(indice) != 'SSN' ?
+           this.getDisabledPorIDNuncaCargado(indice) || this.getErrorSinID(indice) : 
+           this.getDisabledPorIDNuncaCargado(indice) || this.getDisablePorClasificacionNuncaCargada(indice) || this.getErrorConSSNSinClasificacion(indice)
+  }
+
+  // d & t & i o p & t & i
 
   //GETTERS DE VALORES ACTUALES
   /**
