@@ -27,3 +27,16 @@ export enum Estados {
     IDENTIFICACION_EN_EDICION = 'EDITAR',
     CONFIRMAR_EDICION = 'CONFIRMAR'
 }
+
+export class Especie {
+    codigo: string
+    categoria: string
+    tipo: string
+    descripcion: string
+}
+
+export enum NuevaEspecie {
+    NUEVA_CATEGORIA = 'NUEVA_CATEGORIA',
+    NUEVO_TIPO = 'NUEVO_TIPO',
+    NUEVA_ESPECIE = 'NUEVA_ESPECIE'
+}

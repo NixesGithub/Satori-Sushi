@@ -7,6 +7,8 @@ import { DinamicTableComponent } from './dinamic-table/dinamic-table.component';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MyButtonComponent } from './my-button/my-button.component';
 import { DepositariasDinamicTableComponent } from './depositarias-dinamic-table/depositarias-dinamic-table.component';
+import { ContainerComponent } from './container/container.component';
+import { BusquedaComponent } from './busqueda/busqueda.component';
 
 
 @NgModule({
@@ -14,7 +16,9 @@ import { DepositariasDinamicTableComponent } from './depositarias-dinamic-table/
     AppComponent,
     DinamicTableComponent,
     MyButtonComponent,
-    DepositariasDinamicTableComponent
+    DepositariasDinamicTableComponent,
+    ContainerComponent,
+    BusquedaComponent
   ],
   imports: [
     BrowserModule,
