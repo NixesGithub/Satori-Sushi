@@ -9,7 +9,27 @@ import { MyButtonComponent } from './my-button/my-button.component';
 import { DepositariasDinamicTableComponent } from './depositarias-dinamic-table/depositarias-dinamic-table.component';
 import { ContainerComponent } from './container/container.component';
 import { BusquedaComponent } from './busqueda/busqueda.component';
+import { FormWithValidatorsModule } from './form-with-validators/form-with-validators.module';
+import { RouterModule, Routes } from "@angular/router";
 
+const routes: Routes = [
+  {
+    path: 'busqueda',
+    component: ContainerComponent    
+  },
+  {
+    path: 'depositarias',
+    component: DepositariasDinamicTableComponent
+  },
+  {
+    path: 'identificaciones',
+    component: DinamicTableComponent
+  },
+  {
+    path: 'forms',
+    loadChildren: 'app/form-with-validators/form-with-validators.module#FormWithValidatorsModule'
+  }
+]
 
 @NgModule({
   declarations: [
@@ -23,7 +43,9 @@ import { BusquedaComponent } from './busqueda/busqueda.component';
   imports: [
     BrowserModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormWithValidatorsModule,
+    RouterModule.forRoot(routes, { useHash: true })
   ],
   providers: [],
   bootstrap: [AppComponent]
