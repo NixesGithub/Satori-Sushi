@@ -1,0 +1,18 @@
+<form [formGroup]="formSection2">
+
+  <div class="form-container">
+      <input [class.inputError]="edad.invalid && edad.touched" type="text" placeholder="Edad" formControlName="edad">
+      <div class="error" *ngIf="edad.invalid && edad.touched">Campo obligatorio</div>
+  </div>
+
+  <div class="form-container__select">
+    <select formControlName="tipoDoc">
+      <option value="DNI">DNI</option>
+      <option value="CEDULA">CEDULA</option>
+      <option value="OTRO">OTRO</option>
+    </select>
+    <input [class.inputError]="documento.invalid && documento.touched" class="mitadInput" type="text" placeholder="Numero de documento" formControlName="documento">
+    <div class="error" *ngIf="documento.invalid && documento.touched">Campo obligatorio</div>
+  </div>
+
+</form>
