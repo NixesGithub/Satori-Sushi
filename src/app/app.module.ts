@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
-import { DinamicTableComponent } from './dinamic-table/dinamic-table.component';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MyButtonComponent } from './my-button/my-button.component';
 import { DepositariasDinamicTableComponent } from './depositarias-dinamic-table/depositarias-dinamic-table.component';
@@ -22,10 +21,6 @@ const routes: Routes = [
     component: DepositariasDinamicTableComponent
   },
   {
-    path: 'identificaciones',
-    component: DinamicTableComponent
-  },
-  {
     path: 'forms',
     loadChildren: 'app/form-with-validators/form-with-validators.module#FormWithValidatorsModule'
   }
@@ -34,7 +29,6 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    DinamicTableComponent,
     MyButtonComponent,
     DepositariasDinamicTableComponent,
     ContainerComponent,

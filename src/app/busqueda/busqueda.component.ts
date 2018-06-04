@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
-import { Tipos, Especie, NuevaEspecie } from '../dinamic-table/model';
+import { Tipos, Especie, NuevaEspecie } from '../depositarias-dinamic-table/model';
 
 @Component({
   selector: 'app-busqueda',

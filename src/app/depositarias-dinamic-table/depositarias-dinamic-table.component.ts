@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
-import { Tipos, Depositaria, Estados } from '../dinamic-table/model';
+import { Tipos, Depositaria, Estados } from './model';
 
 @Component({
   selector: 'app-depositarias-dinamic-table',
