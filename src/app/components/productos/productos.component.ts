@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RollService } from '../../components/rolls/roll.service';
 
 @Component({
   selector: 'app-productos',
@@ -7,11 +8,9 @@ import { Component } from '@angular/core';
 })
 export class ProductosComponent {
 
+constructor(private rollserv:RollService){
 
-
-  sushi: any = {
-    precio: 70,
-     descripcion: 'roll elaborado en base a arroz, algas y pescado'
- };
-
+}
+rolls:any[] = this.rollserv.getRolls();
+ 
 }

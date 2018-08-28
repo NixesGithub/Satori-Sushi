@@ -22,6 +22,7 @@ import { HomeComponent } from './components/home/home.component';
 import { ProductosComponent } from './components/productos/productos.component';
 import { ContactenosComponent } from './components/contactenos/contactenos.component';
 import { ExtrasComponent } from './components/extras/extras.component';
+import { RollService } from './components/rolls/roll.service';
 
 
 const routes: Routes = [
@@ -61,7 +62,9 @@ const routes: Routes = [
     RouterModule.forRoot(routes, { useHash: true }),
     app_routing
   ],
-  providers: [],
+  providers: [
+    RollService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
