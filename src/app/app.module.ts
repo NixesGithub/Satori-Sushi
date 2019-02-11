@@ -11,9 +11,6 @@ import { app_routing } from './rutas/app.routes';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MyButtonComponent } from './my-button/my-button.component';
-import { DepositariasDinamicTableComponent } from './depositarias-dinamic-table/depositarias-dinamic-table.component';
-import { ContainerComponent } from './container/container.component';
-import { BusquedaComponent } from './busqueda/busqueda.component';
 import { FormWithValidatorsModule } from './form-with-validators/form-with-validators.module';
 import { RouterModule, Routes } from '@angular/router';
 import { NavbarComponent } from './components/Navbar/navbar.component';
@@ -27,14 +24,6 @@ import { RollService } from './components/rolls/roll.service';
 
 const routes: Routes = [
   {
-    path: 'busqueda',
-    component: ContainerComponent
-  },
-  {
-    path: 'depositarias',
-    component: DepositariasDinamicTableComponent
-  },
-  {
     path: 'forms',
     loadChildren: 'app/form-with-validators/form-with-validators.module#FormWithValidatorsModule'
   }
@@ -44,9 +33,6 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     MyButtonComponent,
-    DepositariasDinamicTableComponent,
-    ContainerComponent,
-    BusquedaComponent,
     NavbarComponent,
     FooterComponent,
     HomeComponent,
