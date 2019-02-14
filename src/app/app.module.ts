@@ -46,7 +46,8 @@ const routes: Routes = [
     ReactiveFormsModule,
     FormWithValidatorsModule,
     RouterModule.forRoot(routes, { useHash: true }),
-    app_routing
+    app_routing,
+    
   ],
   providers: [
     RollService
