@@ -11,7 +11,6 @@ import { app_routing } from './rutas/app.routes';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MyButtonComponent } from './my-button/my-button.component';
-import { FormWithValidatorsModule } from './form-with-validators/form-with-validators.module';
 import { RouterModule, Routes } from '@angular/router';
 import { NavbarComponent } from './components/Navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -22,12 +21,7 @@ import { ExtrasComponent } from './components/extras/extras.component';
 import { RollService } from './components/rolls/roll.service';
 
 
-const routes: Routes = [
-  {
-    path: 'forms',
-    loadChildren: 'app/form-with-validators/form-with-validators.module#FormWithValidatorsModule'
-  }
-];
+const routes: Routes = [];
 
 @NgModule({
   declarations: [
@@ -44,10 +38,8 @@ const routes: Routes = [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    FormWithValidatorsModule,
     RouterModule.forRoot(routes, { useHash: true }),
     app_routing,
-    
   ],
   providers: [
     RollService
