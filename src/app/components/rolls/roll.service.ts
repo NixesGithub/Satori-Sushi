@@ -13,7 +13,7 @@ private rolls:any[] = [
 {
   nombre: "Roll",
   descripcion: "'roll elaborado en base a arroz, algas y pescado'",
-  img: "http://www.omedetosushi.com.ar/index_archivos/phiroll.jpg"
+  img: "/assets/img/roll.jpg"
 },
 
 {  

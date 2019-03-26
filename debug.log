@@ -1,0 +1,5 @@
+[0226/225708.125:ERROR:process_info.cc(359)] UncheckedAllocate
+[0304/231211.195:ERROR:process_memory_win.cc(73)] ReadMemory at 0x10fe14a2000 of 384 bytes failed: Solo se completó una parte de una solicitud ReadProcessMemory o WriteProcessMemory. (0x12B)
+[0323/203303.618:ERROR:process_info.cc(359)] UncheckedAllocate
+[0323/204546.194:ERROR:process_info.cc(359)] UncheckedAllocate
+[0323/212710.569:ERROR:process_info.cc(359)] UncheckedAllocate

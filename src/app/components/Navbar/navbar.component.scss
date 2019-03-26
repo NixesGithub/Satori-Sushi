@@ -1,0 +1,51 @@
+.bordeRedondo{
+
+border-radius: 50%;
+      
+}
+
+
+.header {
+  background: url(assets/img/navbarsushi.jpg) no-repeat center;
+  background-size: cover;
+  min-height: 80vh;
+}
+
+.background-transp-red{
+    background-color: red ;
+    opacity:0.5;
+    width: 100%;
+    height: 64px;
+}
+.header .navbar {
+ background-color:transparent;
+ position: absolute;
+ top: 0px;
+ opacity:1;
+}
+
+.satoriLogo{
+    position: absolute;
+    top: 0px;
+    height: 64px;
+    width: 170px;
+    vertical-align:middle;
+}
+
+//navbar
+
+.titulo {
+    text-align: center;
+}
+
+
+/* Make the image fully responsive */
+
+.carousel-inner img {
+    width: 80%;
+    height: 100%;
+}
+
+.centrado {
+    align-items: center;
+}

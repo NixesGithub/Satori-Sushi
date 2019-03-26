@@ -5,17 +5,13 @@
 
     <div class="card-columns">
         <div class="card" *ngFor="let roll of rolls">
-            <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">
+            <div class="card text-white bg-danger mb-3" style="max-width: 18rem;" >
                 <div class="card-header">Rolls</div>
-                <img src="{{roll.img}}">
+                <img src="{{roll.img}}" class="productos">
                 <div class=" card-body ">
                     <h5 class="card-title ">{{roll.nombre}}</h5>
                     <p class="card-text ">{{roll.descripcion}}</p>
                 </div>
             </div>
-
-            <!-- falta mostrar las cartas ordenadas, que aparezcan las imagenes, lo del titulo -->
-
-
         </div>
     </div>
